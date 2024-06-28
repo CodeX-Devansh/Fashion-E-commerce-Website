@@ -1,0 +1,322 @@
+<%- include('../../partials/header.ejs') %>
+    <div class="container-fluid p-0 min-vh-100" style="margin-top: 6%;">
+        <%-include('../../partials/navBar.ejs') %>
+            <div class="container ">
+                <div class="row p-4 mb-4">
+                    <div class="container col-lg-3 col-md-3 col-12 p-3 m-0">
+                        <div class="container bg-white profile_left p-5">
+                            <div class="mb-4 d-flex flex-column">
+                                <h6>Manage My Account</h6>
+                                <a href="/profile" class="text-decoration-none">My Profile</a>
+                            </div>
+                            <div class="mb-4 d-flex flex-column">
+                                <h6>My Orders</h6>
+                                <a href="/profile/order" class="text-decoration-none text-danger">My Orders</a>
+                                <a href="/profile/orderReturn" class="text-decoration-none">My Return</a>
+                            </div>
+                            <div class="mb-4 d-flex flex-column">
+                                <h6>My Address</h6>
+                                <a href="/profile/address" class="text-decoration-none ">My Address</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container col-lg-9 col-md-9 col-12 py-3 p-0 m-0">
+                        <div class="container-fluid bg-white profile_Right">
+                            <div class="container summary d-flex align-items-center justify-content-between pt-3"
+                                id="product">
+                                <h6 class="p-3 ps-4">My Order</h6>
+                                <input type="text" placeholder="what are you looking for?" class="text-center"
+                                    id="myOrder">
+                            </div>
+                            <div class="container  p-2 m-0 mb-2">
+                                <%if(newProduct.length>0){%>
+                                    <div class="Cart_list">
+                                        <div class="px-2">
+                                            <table style="width:100%;">
+                                                <thead class="cartTop" style="position:sticky; top: 0; z-index: 1;">
+                                                    <tr class="cart_table">
+                                                        <th class="first p-3 px-4"><span>ID</span></th>
+                                                        <th class="p-3"><span>Product</span></th>
+                                                        <th class="p-3"><span>Status</span></th>
+                                                        <th class="p-3"><span>Quantity</span></th>
+                                                        <th class="p-3"><span>Price</span></th>
+                                                        <th class="p-3"><span>Expected Date</span></th>
+                                                        <th class="third p-3"><span>Order</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% order.forEach((data,index)=>{ %>
+                                                        <tr class="mt-2">
+                                                            <th scope="col" class="px-4"
+                                                                style="font-size: 13px; color:#959595">
+                                                                <%= index+1 %>
+                                                            </th>
+                                                            <th scope="col " class="t_Image px-3"
+                                                                style="width: 40px; height: 20px;">
+                                                                <img src="/productImages/<%=data.products[0].image[0] %>"
+                                                                    alt="" width="60px">
+                                                            </th>
+                                                            <td scope="col" class="px-3">
+                                                                <%if(data.status == "Processing"){%>
+                                                                <span class=" badge rounded-pill bg-warning">
+                                                                    <%= data.status%>
+                                                                </span>
+                                                                <%}else{%>
+                                                                    <span class=" badge rounded-pill bg-info">
+                                                                        <%= data.status%>
+                                                                    </span>
+                                                                <%}%>
+                                                            </td>
+                                                            <td scope="col" class="tablefont px-3">
+                                                                <span class="couponListFont" style="color:#959595">
+                                                                    <%= data.products.length%>
+                                                                </span>
+                                                            </td>
+                                                            <td scope="col" class="px-3">
+                                                                <span class="couponListFont"
+                                                                    style="color:#959595">₹<span>&nbsp;</span>
+                                                                    <%= data.payment.amount%>
+                                                                </span>
+                                                            </td>
+                                                            <td scope="col" class="px-3">
+                                                                <span class="couponListFont fw-bold"
+                                                                    style="font-size: 14px;color:#959595">
+                                                                    <%= Date[index]%>
+                                                                </span>
+                                                            </td>
+                                                            <td scope="col"
+                                                                class="TableButton d-flex align-items-center py-5 d-flex flex-column gap-2">
+                                                                <form action="/profile/orderStatus/<%=data._id%>" method="post" onsubmit="return ">
+                                                                    <button class="btn btn-success text" style="font-size: 11px;"type="submit">
+                                                                        View
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <%})%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <lottie-player
+                                                src="https://assets10.lottiefiles.com/packages/lf20_3VDN1k.json"
+                                                background="transparent" speed="5"
+                                                style="width: 300px; height: 300px; opacity: 80%;" loop autoplay>
+                                            </lottie-player>
+                                        </div>
+                                <%}%>
+                            </div>
+                        </div>
+                        <div class="container-fluid bg-white profile_Right p-4 mt-4">
+                            <div class="p-3">
+                                <h5 class=" fw-bold">Order History</h5>
+                            </div>
+                            <div class="container  p-2 m-0 mb-2">
+                                <%if(orderHist.length>0){%>
+                                    <div class="Cart_list">
+                                        <div class="px-2">
+                                            <table style="width:100%;">
+                                                <thead class="cartTop" style="position:sticky; top: 0; z-index: 1;">
+                                                    <tr class="cart_table">
+                                                        <th class="first p-3 px-4"><span>ID</span></th>
+                                                        <th class="p-3"><span>Product</span></th>
+                                                        <th class="p-3"><span>Status</span></th>
+                                                        <th class="p-3"><span>Quantity</span></th>
+                                                        <th class="p-3"><span>Price</span></th>
+                                                        <th class="third p-3"><span>Return Availability</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% orderHist.forEach((data,index)=>{%>
+                                                        <tr class="cardList">
+                                                            <td class="py-3 p-4" style="font-size: 13px; color:#959595">
+                                                                <%= index+1 %>
+                                                            </td>
+                                                            <td class=" py-3 d-flex align-items-center">
+                                                                <% if(data.orderCancleRequest===true){%>
+                                                                    <a href="/profile/orderView?id=<%=data._id%>"
+                                                                        class="order-cancel-link container d-flex align-items-center text-decoration-none text-dark"
+                                                                        data-order-id="<%= orderHistStatus[index]._id %>">
+                                                                        <div class="p-0" style="position: relative;">
+                                                                            <h3 class="text-white bg-danger p-1 "
+                                                                                style="position: absolute; font-size: 7.4px;  border-radius: 4px;">
+                                                                                Order Canceled
+                                                                            </h3>
+                                                                            <img src="/productImages/<%=data.products[0].image[0]%>"
+                                                                                alt="" class="img-fluid" width="60px"
+                                                                                style="border-radius: 5px;">
+                                                                        </div>
+                                                                    </a>
+                                                            <td class="py-3 p-4" style="font-size: 13px; color:#959595">
+                                                                <h6 for="" ><span class="badge rounded-pill bg-danger">Order Canceled</span></h6>
+                                                            </td>
+                                                            <%} else{%>
+                                                                <a href="/profile/orderView?id=<%=data._id%>" class="order-cancel-link container d-flex align-items-center text-decoration-none text-dark">
+                                                                    <img src="/productImages/<%=data.products[0].image[0]%>"alt="" class="img-fluid" width="60px"
+                                                                        style="border-radius: 5px;">
+                                                                </a>
+                                                                <span></span>
+                                                                </td>
+                                                                <td class="py-3 p-4" style="font-size: 13px; color:#959595">
+                                                                    <h6 for="" class="">
+                                                                        <%if(data.status == "Deliverd"){%>
+                                                                        <span class="badge rounded-pill bg-success">
+                                                                            <%= data.status %>
+                                                                        </span>
+                                                                        <%}else{%>
+                                                                            <span class="badge rounded-pill bg-danger">
+                                                                                <%= data.status %>
+                                                                            </span>
+                                                                        <%}%>
+                                                                    </h6>
+                                                                </td>
+                                                            <%}%>
+                                                                <td class="py-3 p-4"style="font-size: 13px; color:#959595">
+                                                                    <h6 for="" class="">
+                                                                        <span>
+                                                                            <%= data.products.length %>
+                                                                        </span>
+                                                                    </h6>
+                                                                </td>
+                                                                <td class="py-3 p-4"style="font-size: 13px; color:#959595">
+                                                                    <h6 for="" class="">₹
+                                                                        <span>
+                                                                            <%=data.payment.amount%>
+                                                                        </span>
+                                                                    </h6>
+                                                                </td>
+                                                            <%if(data.orderCancleRequest===false){%>
+                                                                <td class="py-3 p-4"style="font-size: 13px; color:#959595">
+                                                                    <h6 for="" class=""></h6>
+                                                                    <form action="/profile/orderReturn/<%=data._id%>" method="post">
+                                                                        <button class="btn btn-success" style="font-size: 13px;">
+                                                                            Return
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                            <%}else{%>
+                                                                <td class="py-3 p-4"style="font-size: 13px; color:#959595">
+                                                                    <h6 for="" class=""></h6>
+                                                                    <button class="btn btn-danger"style="font-size: 13px;">
+                                                                      NoReturn
+                                                                    </button>
+                                                                </td>
+                                                            <%}%>
+                                                        </tr>
+                                                    <%})%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <lottie-player
+                                                src="https://assets10.lottiefiles.com/packages/lf20_3VDN1k.json"
+                                                background="transparent" speed="5"
+                                                style="width: 300px; height: 300px; opacity: 80%;" loop autoplay>
+                                            </lottie-player>
+                                        </div>
+                                    <%}%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        function showAlert(title, message) {
+            var alertBox = document.getElementById('customAlertBox');
+            var alertTitle = document.getElementById('customAlertTitle');
+            var alertMessage = document.getElementById('customAlertMessage');
+
+            alertTitle.innerHTML = title;
+            alertMessage.innerHTML = message;
+
+            alertBox.style.display = 'block';
+        }
+
+        document.getElementById('customAlertButton').addEventListener('click', function () {
+            var alertBox = document.getElementById('customAlertBox');
+            alertBox.style.display = 'none';
+        });
+
+        // Example usage
+        showAlert('Custom Alert', 'This is a custom alert box.');
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const orderSearch = document.getElementById('myOrder');
+            console.log(orderSearch)
+            const placeholder = orderSearch.placeholder;
+            orderSearch.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    const searchQuery = orderSearch.value;
+                    console.log(searchQuery)
+                    $.ajax({
+                        type: 'get',
+                        url: '/orderSearch',
+                        data: { q: searchQuery },
+                        success: (data) => {
+                            console.log(data)
+                            if (data.length > 0) {
+                                UIupdate(data)
+                            } else {
+                                orderSearch.placeholder = "No Product Found";
+                            }
+                        },
+                        error: (error) => {
+                            console.log(`Error while performing search: ${error}`);
+                        }
+                    });
+                }
+            });
+        })
+
+        function UIupdate(data) {
+            const productContainer = document.getElementById('product-container');
+            productContainer.innerHTML = '';
+
+            data.forEach(function (data) {
+                const item = `
+                             <div class="container bg-white ProductCard m-2 mx-4"
+                                    data-category-id=${data._id}>
+                                    <a href="/detaildView/${data._id}">
+                                        <div class="cardImage mb-2 d-flex align-items-center justify-content-center">
+                                            <img src="/productImages/${data.image[0]}" alt="Product Image">
+                                        </div>
+                                    </a>
+                                    <div class="px-3">
+                                        <span class="text-dark">
+                                            ${data.p_name}
+                                        </span>
+                                        <div class="p_price d-flex justify-content-between">
+                                            <div class="price text-danger">₹ <text>
+                                                    ${data.finalPrice}
+                                                </text> &nbsp; <span>₹ ${data.price}</span></div>
+                                            <div class="favor" style="cursor: pointer;">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </div>
+                                        </div>
+                                        <div class="rating d-flex align-items-center">
+                                            <div class="star d-flex align-items-center">
+                                                <img src="/assets/product/star.png" alt="">
+                                                <img src="/assets/product/star.png" alt="">
+                                                <img src="/assets/product/star.png" alt="">
+                                                <img src="/assets/product/star.png" alt="">
+                                                <img src="/assets/product/star.png" alt="">
+                                            </div>
+                                            <div class="value ms-2">(75)</div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                             `
+                productContainer.innerHTML += item
+            });
+        }
+
+    </script>
+    <%-include('../../partials/footer.ejs') %>
