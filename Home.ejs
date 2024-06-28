@@ -1,0 +1,195 @@
+<%- include("../partials/header.ejs")%>
+    <div class="container-fluid p-0 min-vh-100" style="margin-top: 8%;">
+        <%- include("../partials/navBar.ejs")%>
+
+            <!-- CAROUSEL -->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide mt-2" data-bs-ride="carousel" data-bs-interval="2500">
+                <div class="carousel-inner">
+                    <div class="imageOne col-lg-12 col-12 carousel-item active d-flex align-items-center">
+                        <div class="container  textCard text d-flex flex-column justify-content-center">
+                            <h4 style="color: #4a4949;">Are you ready to</h4>
+                            <h1  class=" col-lg-mb-3">Run with Trend</h1>
+                            <span class=" col-lg-mb-2">Luxury meets ultimate sitting comfort</span>
+                            <a href="/Shop"><button id="bannerDirect" class="btn btn-danger col-lg-mt-3">Discover</button></a>
+                        </div>
+                        <img src="/assets/banners/banner.png" class=" CarouselImage d-block p-2 " alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/assets/banners/banner1.jpg" class="CarouselImage d-block p-2 " alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/assets/banners/banner2.jpg" class="CarouselImage d-block p-2" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="container">
+                <!-- line -->
+                <div class="container">
+                    <hr class="line bg-dark">
+                </div>
+
+                <!-- banner -->
+                <div class="container">
+                    <a href="/Shop"><img src="/assets/banners/banner4.jpg" alt="" class="img-fluid p-3 bannerImage"></a>
+                </div>
+
+                <!-- line -->
+                <div class="container">
+                    <hr class="line bg-dark">
+                </div>
+
+                <!-- view product -->
+                <div class="container d-flex p-3  justify-content-between ">
+                    <div class="textHeading fw-bold fs-4">Latest Women Wearing</div>
+                    <a href="/Shop"><button class="productviewButton">view all products</button></a>
+                </div>
+
+                <!-- Product Container -->
+                <section class="product container p-0">
+                    <button class="pre-btn"><img class="pre-btn-img" src="/assets/icons/arrow.png" alt=""></button>
+                    <button class="nxt-btn"><img class="pre-btn-img" src="/assets/icons/arrow.png" alt=""></button>
+                    <div class="product-container w-100">
+                        <% data.forEach((data,index)=>{ %>
+                            <div class="product-card ">
+                                <div class="product-image">
+                                    <span class="discount-tag"><%= data.productOffer %>% off</span>
+                                    <a href="/detaildView/<%= data._id%>">
+                                        <img src="/productImages/<%=data.image[0] %>" class="product-thumb" alt="">
+                                    </a>
+                                    <a href="/detaildView/<%= data._id%>"><button class="card-btn">View Product</button></a>
+                                </div>
+                                <div class="product-info ">
+                                    <h2 class="product-brand product-name"><%= data.p_name %></h2>
+                                    <span class="price text-danger">₹ <%= data.finalPrice %></span><span class="actual-price">₹ <%= data.price %></span>
+                                    <div class="rating d-flex align-items-center">
+                                        <div class="star d-flex align-items-center">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                        </div>
+                                        <div class="value ms-2">(75)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                </section>
+
+                <!-- line -->
+                <div class="container">
+                    <hr class="line bg-dark mt-5">
+                </div>
+
+                <!-- view Accessory -->
+                <div class="container d-flex p-3  justify-content-between ">
+                    <div class="textHeading fw-bold fs-4">Latest Women Accessory</div>
+                    <a href="/Shop"><button class="productviewButton">view all products</button></a>
+                </div>
+
+                <!--Accessory Container -->
+                <section class="product container p-0">
+                    <button class="pre-btn"><img class="pre-btn-img" src="/assets/icons/arrow.png" alt=""></button>
+                    <button class="nxt-btn"><img class="pre-btn-img" src="/assets/icons/arrow.png" alt=""></button>
+                    <div class="product-container w-100">
+                        <% dataNormal.forEach((data,index)=>{ %>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <span class="discount-tag"><%= data.productOffer %>% off</span>
+                                    <a href="/detaildView/<%= data._id%>">
+                                        <img src="/productImages/<%=data.image[0] %>" class="product-thumb" alt="">
+                                    </a>
+                                    <a href="/detaildView/<%= data._id%>"><button class="card-btn">add to wishlist</button></a>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-brand"><%= data.p_name %></h2>
+                                    <span class="price text-danger">₹ <%= data.finalPrice %></span><span class="actual-price">₹ <%= data.price %></span>
+                                    <div class="rating d-flex align-items-center">
+                                        <div class="star d-flex align-items-center">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                            <img src="/assets/product/star.png" alt="">
+                                        </div>
+                                        <div class="value ms-2">(75)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                </section>
+
+                <!-- line -->
+                <div class="container">
+                    <hr class="line bg-dark mt-5">
+                </div>
+
+                <!-- Service Card -->
+                <div class="container p-3 mb-2">
+                    <div class="row serviceCard border p-3">
+                        <div class="col-lg-4 delivery d-flex flex-column align-items-center justify-content-center">
+                            <div>
+                                <img src="/assets/product/Services.png" alt="" class="img-fluid pb-3"
+                                    style="width:60px">
+                            </div>
+                            <span class="fw-bold">FREE AND FAST DELIVERY</span>
+                            <p style="font-size: 12px;">Free delivery for all orders over $140</p>
+                        </div>
+                        <div class="col-lg-4 coustomer d-flex flex-column align-items-center justify-content-center">
+                            <div>
+                                <img src="/assets/product/Services2.png" alt="" class="img-fluid pb-3"
+                                    style="width:60px">
+                            </div>
+                            <span class="fw-bold">FREE AND FAST DELIVERY</span>
+                            <p style="font-size: 12px;">Free delivery for all orders over $140</p>
+                        </div>
+                        <div class="col-lg-4 guaranty d-flex flex-column align-items-center justify-content-center">
+                            <div>
+                                <img src="/assets/product/Services3.png" alt="" class="img-fluid pb-3"
+                                    style="width:60px">
+                            </div>
+                            <span class="fw-bold">FREE AND FAST DELIVERY</span>
+                            <p style="font-size: 12px;">Free delivery for all orders over $140</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script>
+        const productContainers = [...document.querySelectorAll('.product-container')];
+        const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
+        const preBtn = [...document.querySelectorAll('.pre-btn')];
+
+        productContainers.forEach((item, i) => {
+            let containerDimensions = item.getBoundingClientRect();
+            let containerWidth = containerDimensions.width;
+
+            nxtBtn[i].addEventListener('click', () => {
+                item.scrollLeft += containerWidth;
+            })
+
+            preBtn[i].addEventListener('click', () => {
+                item.scrollLeft -= containerWidth;
+            })
+        })
+    </script>
+    <script>
+        const bannerClick = document.getElementById('bannerDirect');
+        bannerClick.addEventListener('click',()=>{
+             window.location.href = 'http://localhost:5000/Shop'
+        })
+    </script>
+    <%- include("../partials/footer.ejs")%>
