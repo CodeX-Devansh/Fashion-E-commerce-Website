@@ -1,0 +1,157 @@
+<%- include('../partials/header.ejs')%>
+    <div class="container-fluid p-0 min-vh-100 " style="margin-top: 7%;">
+        <%- include('../partials/adminnav.ejs')%>
+            <div class="container f-flex align-items-center justify-content-center">
+                <div class="row p-4 gap-3 d-flex justify-content-center">
+                    <div class="DashBoardUl container col-md-2 p-0 m-0 bg-white d-flex pt-4 sideBar">
+                        <ul class="d-flex flex-column">
+                            <li class="dashOther fw-bold p-1 m-2 ps-4 ">
+                                <img src="/assets/admin/d9.png" alt="" class="img-fluid me-2">
+                                <span><a class="text-decoration-none" style="color: #cdcdcd;"
+                                        href="/admin/Dashboard">DashBoard</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d3.png" alt="" class="img-fluid me-2">
+                                <span><a href="/admin/category" class="text-decoration-none"
+                                        style="color: #cdcdcd;">Category</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d2.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="/admin/productView" class="text-decoration-none"
+                                    style="color: #cdcdcd;">Product</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d4.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="/admin/coustomers" class="text-decoration-none"
+                                    style="color: #cdcdcd;">Coustomer</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d5.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="/admin/order" class="text-decoration-none" style="color: #cdcdcd;">Order</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d6.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="/admin/coupons" class="text-decoration-none" style="color: #cdcdcd;">Coupons</a></span>
+                            </li>
+                            <li class="dashOther fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d2.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="#" class="text-decoration-none" style="color: white;">Banner</a></span>
+                            </li>
+                            <li class="sideBarlist fw-bold p-1 ps-4 m-2">
+                                <img src="/assets/admin/d6.png" alt="" class="img-fluid me-2">
+                                <span></span>
+                                <a href="admin/logOut" class="text-decoration-none" style="color: #cdcdcd;">Logout</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" container col-md-9  p-0 m-0">
+                        <div class="container-fluid p-0 m-0">
+                            <div class="conatiner saleTop bg-white d-flex align-items-center mb-3">
+                                <div class="container summary d-flex align-items-center justify-content-between p-4 "
+                                    id="product">
+                                    <h6 class="p-3 ps-4">product</h6>
+                                    <input type="text" placeholder="what are you looking for?" class="text-center">
+                                </div>
+                            </div>
+
+                            <div class="container-fluid Pa_table bg-white p-4">
+                                <% if(product.length> 0 ){%>
+                                <div class="container-fluid bg-white P_table px-2 ">
+                                    <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+                                        <table class="w-100 tableSize">
+                                            <thead  class="cartTop" id="tableHeader" style="position:sticky; top: 0; z-index: 1;">
+                                                <tr class="cart_table">
+                                                    <th class="first p-3 px-4" scope="col"><span>ID</span></th> 
+                                                    <th class="p-3"scope="col"><span>Image</span> </th> 
+                                                    <th class="p-3"scope="col"><span>Product</span> </th>
+                                                    <th class="p-3"scope="col"><span> Price</span></th>
+                                                    <th class="p-3"scope="col"><span> offer</span></th>
+                                                    <th class="p-3"scope="col"><span> Offer Price</span></th>
+                                                    <th class="p-3"scope="col"><span>Stock</span> </th>
+                                                    <th class="p-3"scope="col"><span> Category</span></th>
+                                                    <th class="third p-3 px-4" scope="col"><span>Action</span> </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% product.forEach((data,index)=>{ %>
+                                                    <tr class="mt-2">
+                                                        <th scope="col" class="px-4">#<%= index+1 %></th>
+                                                        <th scope="col " class="t_Image px-3">
+                                                            <img src="../../productImages/<%= data.image[0] %>" alt="" width="50px">
+                                                        </th>
+                                                        <td scope="col" class="tablefont px-3">
+                                                            <span class="couponListFont"><%= data.p_name%></span>
+                                                        </td>
+                                                        <td scope="col" class="px-3">
+                                                            <span class="couponListFont">₹<span>&nbsp;<%= data.price%></span></span>
+                                                        </td>
+                                                        <td scope="col" class="px-3">
+                                                            <span class="couponListFont text-success fw-bold" style="font-size: 20px;">%<span>&nbsp;<%= data.productOffer%></span></span>
+                                                        </td>
+                                                        <td scope="col" class="px-3">
+                                                            <span class="couponListFont text-success fw-bold">₹<span>&nbsp;<%= data.finalPrice%></span></span>
+                                                        </td>
+                                                        <td scope="col" class="px-1">
+                                                            <input type="text " class="TablePCount text-center couponListFont" value="<%= data.quantity%>">
+                                                        </td>
+                                                        <td scope="col" class="px-3">
+                                                            <span class="couponListFont"><%= data.category[0]%></span>
+                                                        </td>
+                                                        <td scope="col" class="TableButton d-flex align-items-center py-5 d-flex flex-column gap-2">
+                                                            <%if(data.availability===true){%>
+                                                                <form action="/admin/p_unlist/<%= data._id%>" method="post" onsubmit="return confirmDelete()">
+                                                                    <button class="btn btn-danger text" style="font-size: 11px;" type="submit">Unlist</button>
+                                                                 </form>
+                                                                <%}else{%>
+                                                                    <form action="/admin/p_list/<%= data._id%>" method="post" onsubmit="return confirmDelete()">
+                                                                        <button class="btn btn-success text" style="font-size: 11px;" type="submit">List</button>
+                                                                     </form>
+                                                            <%}%>
+                                                             <a href="/admin/updateProduct/<%= data._id %>" class="btn btn-warning text-white catagoryEdit" style="color:rgb(7, 7, 7); font-size: 11px;">Edit</a>
+                                                        </td>
+                                                    </tr>
+                                               <%})%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="conatiner ms-2 pb-2">
+                                    <button class="btn btn-danger addbutton">
+                                        <a href="/admin/newProduct" class="text-decoration-none"
+                                            style="color: white">Add New Product</a>
+                                    </button>
+                                </div>
+                                <%}else{%>
+                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                        <lottie-player
+                                            src="https://assets2.lottiefiles.com/private_files/lf30_cgfdhxgx.json"
+                                            background="transparent" speed="1" style="width: 300px; height: 300px;"
+                                            loop autoplay></lottie-player>
+                                        <h5 style="font-weight: 600; color: #cdcdcd;">No Categorys Are Available Now
+                                        </h5>
+                                        <div class="conatiner my-3 pb-2">
+                                            <button class="btn btn-danger p-2" style="border-radius: 10px;
+                                            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+                                            font-size: 10px;
+                                            font-weight: 400;">
+                                                <a href="/admin/newProduct" class="text-decoration-none"
+                                                    style="color: white; font-size: 13.5px;">Add New Product</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <script src="/js/alert.js"></script>
+
+    <%- include('../partials/adminfooter.ejs')%>
